@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import { useSearchParams, usePathname } from 'next/navigation';
 
-export default function Ideas() {
+function IdeasContent() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -213,5 +213,13 @@ export default function Ideas() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Ideas() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <IdeasContent />
+    </Suspense>
   );
 }
