@@ -2,12 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 export default function Ideas() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialPage = parseInt(urlParams.get('page')) || 1;
-  const initialSize = parseInt(urlParams.get('size')) || 10;
-  const initialSort = urlParams.get('sort') || '-published_at';
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const initialPage = parseInt(searchParams.get('page')) || 1;
+  const initialSize = parseInt(searchParams.get('size')) || 10;
+  const initialSort = searchParams.get('sort') || '-published_at';
 
   const [ideas, setIdeas] = useState([]);
   const [page, setPage] = useState(initialPage);
@@ -49,7 +52,7 @@ export default function Ideas() {
         searchParams.set(key, newParams[key]);
       }
     }
-    const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+    const newUrl = `${pathname}?${searchParams.toString()}`;
     window.history.pushState(null, '', newUrl);
   };
 
@@ -143,7 +146,7 @@ export default function Ideas() {
     <div>
       <div className="relative">
         <div
-          className="bg-gradient-to-tr from-blue-500 to-purple-700  h-80 relative"
+          className="bg-gradient-to-tr from-blue-500 to-purple-700 h-80 relative"
           style={{
             clipPath: 'polygon(0 0%, 100% 0%, 100% 75%, 0% 100%)',
           }}
