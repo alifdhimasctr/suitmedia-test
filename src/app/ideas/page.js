@@ -151,45 +151,48 @@ function IdeasContent() {
             clipPath: 'polygon(0 0%, 100% 0%, 100% 75%, 0% 100%)',
           }}
         >
-          <div className="text-white text-5xl font-bold flex flex-col justify-center items-center h-full">
+          <div className="text-white text-3xl md:text-5xl font-bold flex flex-col justify-center items-center h-full">
             <div className="text-center">
-              <h1 className="text-6xl font-bold">Ideas</h1>
-              <p className="text-2xl">We have a lot of ideas</p>
+              <h1 className="text-4xl md:text-6xl font-bold">Ideas</h1>
+              <p className="text-lg md:text-2xl">We have a lot of ideas</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="p-8 px-20">
-        <div className="flex justify-between mb-4 items-center">
-          <p className='text-black text-sm'>showing {startItem}-{endItem} of {totalItems}</p>
-          <div className="flex flex-row gap-2 items-center">
-          <p className='text-black text-sm'>Show per page</p>
-          <select value={size} onChange={handleSizeChange} className=" select-sm bg-white border-2 border-gray-400 rounded-full hover:bg-gray-50 ">
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
-          <p className='text-black text-sm '>Sort by</p>
-          <select value={sort} onChange={handleSortChange} className=" select-sm bg-white border-2 border-gray-400 rounded-full hover:bg-gray-50 ">
-            <option value="-published_at">Newest</option>
-            <option value="published_at">Oldest</option>
-          </select>
+      <div className="p-4 md:p-8 lg:px-20">
+        <div className="flex flex-col md:flex-row justify-between mb-4 items-center">
+          <p className='text-black text-xs md:text-sm'>Showing {startItem}-{endItem} of {totalItems}</p>
+          <div className="flex flex-col md:flex-row gap-2 items-center">
+            <div className="flex items-center gap-2">
+              <p className='text-black text-xs md:text-sm'>Show per page</p>
+              <select value={size} onChange={handleSizeChange} className="select-xs md:select-sm bg-white border-2 border-gray-400 rounded-full hover:bg-gray-50">
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className='text-black text-xs md:text-sm'>Sort by</p>
+              <select value={sort} onChange={handleSortChange} className="select-xs md:select-sm bg-white border-2 border-gray-400 rounded-full hover:bg-gray-50">
+                <option value="-published_at">Newest</option>
+                <option value="published_at">Oldest</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {ideas.map((idea) => (
             <div key={idea.id} className="border shadow-lg rounded-lg p-4">
               <img
                 src={idea.medium_image.url}
                 alt={idea.title}
-                className="w-full h-48 object-cover mb-4"
+                className="w-full h-32 sm:h-48 object-cover mb-4"
                 loading="lazy"
               />
-              <p className='text'>{new Date(idea.published_at).toLocaleDateString()}</p>
-              <h2 className="text-lg font-bold text-black line-clamp-3">{idea.title}</h2>
-
+              <p className='text-sm'>{new Date(idea.published_at).toLocaleDateString()}</p>
+              <h2 className="text-md md:text-lg font-bold text-black line-clamp-3">{idea.title}</h2>
             </div>
           ))}
         </div>
@@ -198,7 +201,7 @@ function IdeasContent() {
           <button
             onClick={() => goToPage(page - 1)}
             disabled={page === 1}
-            className="border px-3 py-1 mr-2 rounded-lg disabled:opacity-50 rounded-lg"
+            className="border px-2 py-1 mr-2 rounded-lg disabled:opacity-50"
           >
             Previous
           </button>
@@ -206,7 +209,7 @@ function IdeasContent() {
           <button
             onClick={() => goToPage(page + 1)}
             disabled={page === totalPages}
-            className="border px-3 py-1 ml-2 rounded-lg disabled:opacity-50"
+            className="border px-2 py-1 ml-2 rounded-lg disabled:opacity-50"
           >
             Next
           </button>
